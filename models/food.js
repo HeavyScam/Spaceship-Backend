@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const foodSchema = new Schema({
     foodInterest: {
-        type: Array,
+        type: String,
     },
 });
 
