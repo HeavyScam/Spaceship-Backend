@@ -4,7 +4,7 @@ const cors = require('cors');
 const User = require('./models/user');
 const Food = require("./models/food");
 const Music = require("./models/music");
-const userController = require('./controllers/userController');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 }
 )
 
-app.use('/api/v1/register', userController);
+app.use('/api/v1', userRoute);
 
 app.post('/addfood', async (req, res) => {
     const { foodInterest } = req.body;
