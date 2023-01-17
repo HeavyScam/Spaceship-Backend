@@ -7,6 +7,10 @@ router.post('/register', userController.registerUser);
 // Login route
 router.post('/login', userController.loginUser);
 
+router.post('/addpreference', userController.preferences);
+
+router.get('/getuser/:id', userController.getUserbyId);
+
 
 module.exports = router;
 

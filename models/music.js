@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const musicSchema = new Schema({
-    artists: {
+    artist: {
         type: String,
     },
 });

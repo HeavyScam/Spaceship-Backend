@@ -78,13 +78,6 @@ app.get('/getallusers', async (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 
-// mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-//     if (err) throw err;
-//     console.log('MongoDB connection established');
-//     console.log(process.env.DB_URI)
-// }
-// )
-
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 }

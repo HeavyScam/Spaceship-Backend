@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const Artist = require('../models/music');
+const Food = require('../models/food');
 
 const registerUser = async (req, res) => {
     const { name, userName, password, age, instagram, gender } = req.body;
@@ -101,4 +103,63 @@ const loginUser = async (req, res) => {
 }
 
 
-module.exports = { registerUser, loginUser }
+// Route to let users choose preferences and save in database and in user model
+
+const preferences = async (req, res) => {
+    const { artist, foodInterest } = req.body;
+    console.log(artist, foodInterest)
+    try {
+        const artistInfo = new Artist({
+            artist,
+        })
+        const savedArtist = await artistInfo.save();
+        console.log(savedArtist);
+        // const movieInfo = new Movie({
+        //     movie,
+        // })
+        // const savedMovie = await movieInfo.save();
+        // console.log(savedMovie);
+        const foodInfo = new Food({
+            foodInterest,
+        })
+        const savedFood = await foodInfo.save();
+        console.log(savedFood);
+        // const travelInfo = new Travel({
+        //     travel,
+        // })
+        // const savedTravel = await travelInfo.save();
+        // console.log(savedTravel);
+        res.status(200).json({
+            message: 'Preferences saved successfully',
+            success: true,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: err.message,
+            success: false,
+        });
+    }
+}
+
+
+const getUserbyId = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findOne({ _id: id });
+        res.status(200).json({
+            message: 'User found',
+            success: true,
+            user,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: err.message,
+            success: false,
+        });
+    }
+}
+
+
+module.exports = { registerUser, loginUser, preferences, getUserbyId }
